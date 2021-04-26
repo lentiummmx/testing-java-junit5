@@ -1,6 +1,8 @@
 package guru.springframework.sfgpetclinic.controllers;
 
+import guru.springframework.sfgpetclinic.exceptions.ValueNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,6 +24,7 @@ class IndexControllerTest {
         assertEquals("indexd", controller.index(), "Wrong View Returned");
     }
 
+    @Disabled
     @Test
     @DisplayName("Test Exception")
     void oupsHandler() {
@@ -29,5 +32,11 @@ class IndexControllerTest {
         assertTrue("qwerty".equals(controller.oupsHandler()), () -> "This is some expensive " +
                 "Message to build " +
                 "for my test");
+    }
+
+    @Test
+    @DisplayName("Test Exception")
+    void oupsHandlerException() {
+        assertThrows(ValueNotFoundException.class, () -> controller.oupsHandler());
     }
 }
