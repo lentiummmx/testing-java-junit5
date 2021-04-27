@@ -24,6 +24,6 @@ class OwnerTest {
             )
         );
 
-        assertThat(owner.getCity(), is("Key West"));
+        assertThat(owner.getCity(), is("Key West"));    // hamcrest
     }
 }
