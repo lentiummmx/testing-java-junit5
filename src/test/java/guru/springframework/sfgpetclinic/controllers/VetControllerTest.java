@@ -1,8 +1,13 @@
 package guru.springframework.sfgpetclinic.controllers;
 
 import guru.springframework.sfgpetclinic.fauxspring.Model;
+import guru.springframework.sfgpetclinic.fauxspring.ModelMapImpl;
+import guru.springframework.sfgpetclinic.model.Speciality;
 import guru.springframework.sfgpetclinic.model.Vet;
+import guru.springframework.sfgpetclinic.services.SpecialtyService;
 import guru.springframework.sfgpetclinic.services.VetService;
+import guru.springframework.sfgpetclinic.services.map.SpecialityMapService;
+import guru.springframework.sfgpetclinic.services.map.VetMapService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,61 +20,35 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class VetControllerTest {
 
-    VetService service;
+    VetService vetService;
+    SpecialtyService specialtyService;
+    VetController controller;
 
     @BeforeEach
     void setUp() {
-        service = new VetService() {
-            @Override
-            public Set<Vet> findAll() {
-                Set<Vet> vetSet = new HashSet<>();
-                vetSet.add(new Vet(1l, "FirstName", "LastName", null));
-                vetSet.add(new Vet(2l, "First Name", "Last Name", null));
-                return vetSet;
-            }
+        specialtyService = new SpecialityMapService();
+        vetService = new VetMapService(specialtyService);
+        controller = new VetController(vetService);
 
-            @Override
-            public Vet findById(Long aLong) {
-                return null;
-            }
+        Vet vet = new Vet(1l, "FirstName", "LastName", new HashSet<Speciality>(0));
+        Vet vet2 = new Vet(2l, "First Name", "Last Name", new HashSet<>(0));
 
-            @Override
-            public Vet save(Vet object) {
-                return null;
-            }
-
-            @Override
-            public void delete(Vet object) {
-
-            }
-
-            @Override
-            public void deleteById(Long aLong) {
-
-            }
-        };
+        vetService.save(vet);
+        vetService.save(vet2);
     }
 
     @Test
     void listVets() {
-        VetController controller = new VetController(service);
-
-        Map<String, Object> modelMap = new HashMap<>();
-        Model model = new Model() {
-            @Override
-            public void addAttribute(String key, Object o) {
-                modelMap.put(key, o);
-            }
-
-            @Override
-            public void addAttribute(Object o) {
-
-            }
-        };
+        Model model = new ModelMapImpl();
+        String view = controller.listVets(model);
 
         assertAll("Testing VetController",
-                () -> assertEquals("vets/index", controller.listVets(model)),
-                () -> assertEquals(service.findAll().size(), ((Set<Vet>) modelMap.get("vets")).size())
+                () -> assertEquals("vets/index", view),
+                () -> {
+                    ModelMapImpl modelMap = (ModelMapImpl) model;
+                    Set<Vet> vetsAttr = (Set<Vet>) modelMap.getModelMap().get("vets");
+                    assertEquals(2, vetsAttr.size());
+                }
         );
     }
 }
