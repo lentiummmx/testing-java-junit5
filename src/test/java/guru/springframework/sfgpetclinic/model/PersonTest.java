@@ -1,13 +1,14 @@
 package guru.springframework.sfgpetclinic.model;
 
+import guru.springframework.sfgpetclinic.ModelTests;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Tag("models")
-class PersonTest {
+//@Tag("models")
+class PersonTest implements ModelTests {
 
     @BeforeEach
     void setUp() {
