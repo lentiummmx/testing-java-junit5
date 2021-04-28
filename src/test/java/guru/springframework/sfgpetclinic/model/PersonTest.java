@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 //@Tag("models")
 class PersonTest implements ModelTests {
 
-    @BeforeEach
-    void setUp() {
-    }
+    // @BeforeEach
+    // void setUp() {
+    // }
 
     @Test
     void getFirstName() {
@@ -50,12 +50,5 @@ class PersonTest implements ModelTests {
                 () -> assertEquals("Joee", person.getFirstName(), "First Name Failed"),
                 () -> assertEquals("Buckk", person.getLastName(), "Last Name Failed")
         );
-    }
-
-    @RepeatedTest(value = 10, name = "{displayName} : {currentRepetition} - {totalRepetitions}")
-    @DisplayName("My Repeated Test")
-    @Test
-    void myRepeatedTest() {
-        // TODO: add impl
     }
 }
