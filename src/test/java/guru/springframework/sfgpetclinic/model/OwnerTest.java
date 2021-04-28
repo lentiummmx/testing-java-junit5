@@ -24,11 +24,13 @@ class OwnerTest implements ModelTests {
 
         assertAll("Properties Test",
             () -> assertAll("Person Properties",
-                    () -> assertEquals("Joee", owner.getFirstName(), "First Name Did not Match"),
+                    //() -> assertEquals("Joee", owner.getFirstName(), "First Name Did not Match"),
+                    () -> assertEquals("Joe", owner.getFirstName(), "First Name Did not Match"),
                     () -> assertEquals("Buck", owner.getLastName())
                 ),
             () -> assertAll("Owner Properties",
-                () -> assertEquals("Key Westt", owner.getCity(), "City Did not Match"),
+//                () -> assertEquals("Key Westt", owner.getCity(), "City Did not Match"),
+                () -> assertEquals("Key West", owner.getCity(), "City Did not Match"),
                 () -> assertEquals("1231231234", owner.getTelephone())
             )
         );
