@@ -1,5 +1,7 @@
 # Introduction to JUnit 5 with Maven
 
+[![lentiummmx](https://circleci.com/gh/lentiummmx/testing-java-junit5.svg?style=shield)](https://app.circleci.com/pipelines/github/lentiummmx/testing-java-junit5)
+
 All source code examples in the repository are for my [Online Course - Testing Spring Beginner to Guru](https://www.udemy.com/testing-spring-boot-beginner-to-guru/?couponCode=GITHUB_REPO)
 
 This source code repository contains JUnit 5 test examples with Maven.
